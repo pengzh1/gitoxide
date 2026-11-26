@@ -62,7 +62,7 @@ pub fn describe(
 ) -> Result<()> {
     repo.object_cache_size_if_unset(4 * 1024 * 1024);
     let commit = match rev_spec {
-        Some(spec) => repo.rev_parse_single(spec)?.object()?.try_into_commit()?,
+        Some(spec) => repo.rev_parse_single(spec)?.object()?.peel_to_commit()?,
         None => repo.head_commit()?,
     };
     use gix::commit::describe::SelectRef::*;
